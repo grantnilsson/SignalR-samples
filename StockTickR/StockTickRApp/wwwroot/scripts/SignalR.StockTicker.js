@@ -13,7 +13,7 @@ if (!String.prototype.supplant) {
 var stockTable = document.getElementById('stockTable');
 var stockTableBody = stockTable.getElementsByTagName('tbody')[0];
 var rowTemplate = '<td>{symbol}</td><td>{price}</td><td>{DayOpen}</td><td>{DayHigh}</td><td>{dayLow}</td><td class="changeValue"><span class="dir {directionClass}">{direction}</span> {change}</td><td>{percentChange}</td>';
-var tickerTemplate = '<span class="symbol">{symbol}</span> <span class="price">{price}</span> <span class="changeValue"><span class="dir {directionClass}">{direction}</span> {Change} ({percentChange})</span>';
+var tickerTemplate = '<span class="symbol">{symbol}</span> <span class="price">{price}</span> <span class="changeValue"><span class="dir {directionClass}">{direction}</span> {change} ({percentChange})</span>';
 var stockTicker = document.getElementById('stockTicker');
 var stockTickerBody = stockTicker.getElementsByTagName('ul')[0];
 var up = '▲';
@@ -135,6 +135,9 @@ function addOrReplaceStock(table, stock, type, template) {
 
 function formatStock(stock) {
     stock.price = stock.price.toFixed(2);
+    stock.DayOpen = stock.dayOpen.toFixed(2);
+    stock.DayLow = stock.dayLow.toFixed(2);
+    stock.DayHigh = stock.dayHigh.toFixed(2);
     stock.percentChange = (stock.percentChange * 100).toFixed(2) + '%';
     stock.direction = stock.change === 0 ? '' : stock.change >= 0 ? up : down;
     stock.directionClass = stock.change === 0 ? 'even' : stock.change >= 0 ? 'up' : 'down';
